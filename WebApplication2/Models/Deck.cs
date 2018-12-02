@@ -47,6 +47,15 @@ namespace Pesten.Models
         }
 
         /// <summary>
+        /// Returns the top card of the discard pile, but does not remove it from the pile
+        /// </summary>
+        /// <returns>The current top card of the pile</returns>
+        public Card PeekTopCard()
+        {
+            return deck[0];
+        }
+
+        /// <summary>
         /// Will shuffle the given list using the given random seed
         /// </summary>
         /// <typeparam name="T">The type of the list</typeparam>

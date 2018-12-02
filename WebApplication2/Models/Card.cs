@@ -48,6 +48,31 @@ namespace Pesten.Models
             return output;
         }
 
+        public String ToShortString()
+        {
+            string output = "";
+
+            switch (this.number)
+            {
+                case 1: output += "A"; break;
+                case 11: output += "J"; break;
+                case 12: output += "Q"; break;
+                case 13: output += "K"; break;
+                default: output += number; break;
+            }
+
+            switch (this.suit)
+            {
+                case Suit.Spades: output += "♠"; break;
+                case Suit.Diamonds: output += "♦"; break;
+                case Suit.Hearts: output += "♥"; break;
+                case Suit.Clubs: output += "♣"; break;
+                default: output += "?"; break;
+            }
+
+            return output;
+        }
+
         public Suit GetSuit()
         {
             return suit;

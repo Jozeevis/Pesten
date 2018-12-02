@@ -4,13 +4,23 @@
 @model Dealer
 
 <div class="row">
-    <div class="col-lg-8 table-bordered">
-        <div class="col-lg-2"><button type="button" name="Next" onclick="location.href='@Url.Action("Next", "Home")'">Next</button></div>
-        <div class="col-lg-2"><button type="button" name="Reset" onclick="location.href='@Url.Action("Reset", "Home")'">Reset</button></div>
-        <div class="col-lg-2"><b>Deck size:</b> @Model.GetDeckSize()</div>
-        <div class="col-lg-6"><b>Discard:</b> @Model.GetTopCard().ToString()</div>
+    <div class="col-lg-6 table-bordered" style="padding-top: 5px; padding-bottom: 5px">
+        <div class="row" style="padding-bottom: 5px;">
+            <div >
+                <div class="col-lg-2"><button type="button" name="Reset" onclick="location.href='@Url.Action("Reset", "Home")'">Reset</button></div>
+                <div class="col-lg-3"><b>Deck size:</b> @Model.GetDeckSize().ToString()</div>
+                <div class="col-lg-7"><b>Deck top card:</b> @Model.GetDeckTop().ToString() (@Model.GetDeckTop().ToShortString())</div>
+            </div>
+        </div>
+        <div class="row">
+            <div >
+                <div class="col-lg-2"><button type="button" name="Next" onclick="location.href='@Url.Action("Next", "Home")'">Next</button></div>
+                <div class="col-lg-3"><b>Discard size:</b> @Model.GetDiscardSize().ToString()</div>
+                <div class="col-lg-7"><b>Discard top card:</b> @Model.GetTopCard().ToString() (@Model.GetTopCard().ToShortString())</div>
+            </div>
+        </div>
     </div>
-    <div class="col-lg-4 table-bordered">
+    <div class="col-lg-5 col-lg-offset-1 table-bordered" style="padding-top: 5px; padding-bottom: 5px; height: 20em;">
         <b>Log:</b><br />
         <ul>
             @foreach (var s in Model.GetLog())
@@ -25,24 +35,24 @@
 
 <div class="row">
     <div class="col-lg-5">
-        <div class="row table-bordered @(Model.GetCurrentTurn() == 0 ? "bg-primary" : "")"><b>@Model.GetPlayers()[0].GetName()'s hand</b></div>
+        <div class="row table-bordered @(Model.GetCurrentTurn() == 0 ? "bg-primary" : "")" style="padding: 5px"><b>@Model.GetPlayers()[0].GetName()'s hand</b></div>
         <div class="row table-bordered">
             <ul>
                 @foreach (var card in Model.GetPlayers()[0].GetHand())
                 {
-                    <li>@card.ToString()</li>
+                    <li>@card.ToString() (@card.ToShortString())</li>
                 }
             </ul>
         </div>
     </div>
     <div class="col-lg-2"></div>
     <div class="col-lg-5">
-        <div class="row table-bordered @(Model.GetCurrentTurn() == 1 ? "bg-primary" : "")"><b>@Model.GetPlayers()[1].GetName()'s hand</b></div>
+        <div class="row table-bordered @(Model.GetCurrentTurn() == 1 ? "bg-primary" : "")" style="padding: 5px"><b>@Model.GetPlayers()[1].GetName()'s hand</b></div>
         <div class="row table-bordered">
             <ul>
                 @foreach (var card in Model.GetPlayers()[1].GetHand())
                 {
-                    <li>@card.ToString()</li>
+                    <li>@card.ToString() (@card.ToShortString())</li>
                 }
             </ul>
         </div>
@@ -53,24 +63,24 @@
 
 <div class="row">
     <div class="col-lg-5">
-        <div class="row table-bordered @(Model.GetCurrentTurn() == 2 ? "bg-primary" : "")"><b>@Model.GetPlayers()[2].GetName()'s hand</b></div>
+        <div class="row table-bordered @(Model.GetCurrentTurn() == 2 ? "bg-primary" : "")" style="padding: 5px"><b>@Model.GetPlayers()[2].GetName()'s hand</b></div>
         <div class="row table-bordered">
             <ul>
                 @foreach (var card in Model.GetPlayers()[2].GetHand())
                 {
-                    <li>@card.ToString()</li>
+                    <li>@card.ToString() (@card.ToShortString())</li>
                 }
             </ul>
         </div>
     </div>
     <div class="col-lg-2"></div>
     <div class="col-lg-5">
-        <div class="row table-bordered @(Model.GetCurrentTurn() == 3 ? "bg-primary" : "")"><b>@Model.GetPlayers()[3].GetName()'s hand</b></div>
+        <div class="row table-bordered @(Model.GetCurrentTurn() == 3 ? "bg-primary" : "")" style="padding: 5px"><b>@Model.GetPlayers()[3].GetName()'s hand</b></div>
         <div class="row table-bordered">
             <ul>
                 @foreach (var card in Model.GetPlayers()[3].GetHand())
                 {
-                    <li>@card.ToString()</li>
+                    <li>@card.ToString() (@card.ToShortString())</li>
                 }
             </ul>
         </div>

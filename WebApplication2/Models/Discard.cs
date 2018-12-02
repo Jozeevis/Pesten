@@ -51,5 +51,10 @@ namespace Pesten.Models
             // Output the list of other cards
             return output;
         }
+
+        public int GetSize()
+        {
+            return discard.Count;
+        }
     }
 }

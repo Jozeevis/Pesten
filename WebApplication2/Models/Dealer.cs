@@ -38,6 +38,8 @@ namespace Pesten.Models
         /// </summary>
         private void NewGame()
         {
+            log = new List<string>();
+
             players = new List<Player>();
             // Make the correct amount of players
             for (int i = 0; i < NROFPLAYERS; i++)
@@ -55,22 +57,39 @@ namespace Pesten.Models
                 players.Add(new Player(name));
             }
 
+            String logline = "Starting game with players ";
+            for(int i = 0; i < players.Count; i++)
+            {
+                if (i == players.Count - 1)
+                    logline += "and ";
+                logline += players[i].GetName();
+                if (i < players.Count - 1)
+                    logline += ", ";
+                else
+                    logline += ".";
+            }
+            AddToLog(logline);
+
             // Make the deck
             deck = new Deck();
 
             // Deal the correct amount of starting cards to each player
             foreach (Player player in players)
             {
+                logline = player.GetName() + " has been dealt: ";
                 for (int i = 0; i < STARTINGHANDSIZE; i++)
                 {
-                    player.AddCardToHand(deck.GetTopCard());
+                    Card card = deck.GetTopCard();
+                    player.AddCardToHand(card);
+                    logline += card.ToShortString() + " ";
                 }
+                AddToLog(logline);
             }
 
             // Make the discard pile and play the first card
-            discard = new Discard(deck.GetTopCard());
-
-            log = new List<string>();
+            Card top = deck.GetTopCard();
+            discard = new Discard(top);
+            AddToLog("Top card is: " + top.ToShortString());
 
             done = false;
         }
@@ -97,14 +116,15 @@ namespace Pesten.Models
                     // If they can't make a play, have them draw a card
                     if (play == null)
                     {
-                        currentPlayer.AddCardToHand(deck.GetTopCard());
-                        output = currentPlayer.GetName() + " drew a card.";
+                        Card card = deck.GetTopCard();
+                        currentPlayer.AddCardToHand(card);
+                        output = currentPlayer.GetName() + " can't play a card, and drew instead: " + card.ToShortString();
                     }
                     // If they can make a play, add that card to the discard pile
                     else
                     {
                         discard.AddCard(play);
-                        output = currentPlayer.GetName() + " played the " + play.ToString() + ".";
+                        output = currentPlayer.GetName() + " played " + play.ToShortString() + ".";
                         if (currentPlayer.GetHandSize() == 1)
                         {
                             output += "\nThey only have 1 card left in their hand!";
@@ -147,9 +167,19 @@ namespace Pesten.Models
             return discard.PeekTopCard();
         }
 
+        public Card GetDeckTop()
+        {
+            return deck.PeekTopCard();
+        }
+
         public int GetDeckSize()
         {
             return deck.GetDeckSize();
+        }
+
+        public int GetDiscardSize()
+        {
+            return discard.GetSize();
         }
 
         public int GetCurrentTurn()
