@@ -45,6 +45,11 @@ namespace Pesten.Models
             hand.Add(card);
         }
 
+        public List<Card> GetHand()
+        {
+            return hand;
+        }
+
         public int GetHandSize()
         {
             return hand.Count;

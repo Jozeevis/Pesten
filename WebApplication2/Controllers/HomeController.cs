@@ -4,34 +4,29 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.Models;
+using Pesten.Models;
 
-namespace WebApplication2.Controllers
+namespace Pesten.Controllers
 {
     public class HomeController : Controller
     {
+        Dealer model = Dealer.GetDealer();
+
         public IActionResult Index()
         {
-            return View();
+            return View("Index", model);
         }
 
-        public IActionResult About()
+        public IActionResult Next()
         {
-            ViewData["Message"] = "Pesten";
-
-            return View();
+            model.Next();
+            return View("Index", model);
         }
 
-        public IActionResult Contact()
+        public IActionResult Reset()
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            model.Reset();
+            return View("Index", model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

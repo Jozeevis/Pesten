@@ -27,7 +27,7 @@ namespace Pesten.Models
             EmptyDeck();
             foreach (Suit suit in (Suit[])Enum.GetValues(typeof(Suit)))
             {
-                for(int n = 2; n<=13; n++)
+                for(int n = 1; n<=13; n++)
                 {
                     deck.Add(new Card(suit, n));
                 }
